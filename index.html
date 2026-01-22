@@ -42,6 +42,7 @@
       }
 
       /* Kurung tutup } hilang di sini */
+
       .icon {
         font-size: 50px;
         margin-bottom: 10px;
@@ -104,7 +105,6 @@
         <h3>Server CBT Ujian</h3>
         <p>IP: 192.168.10.200</p>
         <p>Uptime: 5 Jam</p>
-
         <div class="status-box offline">STATUS: OFFLINE</div>
       </div>
 
@@ -113,14 +113,37 @@
         <h3>NAS File Server</h3>
         <p>IP: 192.168.50.5</p>
         <p>Uptime: -</p>
-
         <div class="status-box maintenance">STATUS: MAINTENANCE</div>
       </div>
     </div>
     <div style="text-align: center; margin-top: 40px">
-      <button onclick="alert('Memperbarui Status Server...')">
-        REFRESH STATUS
-      </button>
+      <button onclick="refreshStatus()">REFRESH STATUS</button>
     </div>
+
+    <script>
+      let isToggled = false;
+      const originalStatuses = ["online", "offline", "maintenance"];
+
+      function refreshStatus() {
+        const statusBoxes = document.querySelectorAll(".status-box");
+        if (!isToggled) {
+          // First click: all online
+          statusBoxes.forEach((box) => {
+            box.className = "status-box online";
+            box.textContent = "STATUS: ONLINE";
+          });
+          isToggled = true;
+        } else {
+          // Second click: back to original
+          statusBoxes.forEach((box, index) => {
+            box.className = "status-box " + originalStatuses[index];
+            if (index === 0) box.textContent = "STATUS: ONLINE";
+            else if (index === 1) box.textContent = "STATUS: OFFLINE (RUSAK)";
+            else box.textContent = "STATUS: MAINTENANCE";
+          });
+          isToggled = false;
+        }
+      }
+    </script>
   </body>
 </html>
