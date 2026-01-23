@@ -138,7 +138,7 @@
           statusBoxes.forEach((box, index) => {
             box.className = "status-box " + originalStatuses[index];
             if (index === 0) box.textContent = "STATUS: ONLINE";
-            else if (index === 1) box.textContent = "STATUS: OFFLINE (RUSAK)";
+            else if (index === 1) box.textContent = "STATUS: OFFLINE";
             else box.textContent = "STATUS: MAINTENANCE";
           });
           isToggled = false;
